@@ -1,0 +1,145 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  padding: 32px;
+}
+
+.main-container {
+  width: 400px;
+  height: 600px;
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background-color:#dddada;
+}
+
+.calculator {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  grid-template-areas:
+  'display display display display'
+  'number7 number8 number9 plus'
+  'number4 number5 number6 minus'
+  'number1 number2 number3 multiply'
+  'clear number0 equal divide';
+  background-color:#f3f0f0;
+  border-radius: 16px;
+  margin: 16px 0 16px 0;
+}
+
+.display {
+  grid-area: display;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  font-size: 56px;
+  background-color:black;
+  border-radius: 5px;
+  margin: 16px 0 16px 0;
+  padding: 0 16px 0;
+  color: rgb(255, 255, 255);
+}
+
+.button {
+  height: 70px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  /* border: 1px solid #868686; */
+  box-shadow: 1px 2px 1px rgb(172, 170, 170);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.button:active {
+  box-shadow: none;
+}
+
+.operator {
+  background-color: #0082d8;
+}
+
+.clear {
+  background-color: rgba(255, 0, 0, 0.432);
+}
+
+.number {
+  background-color: rgba(95, 95, 95, 0.671);
+}
+
+.number7 {
+  grid-area: number7;
+}
+
+.number8 {
+  grid-area: number8;
+}
+
+.number9 {
+  grid-area: number9;
+}
+
+.plus {
+  grid-area: plus;
+}
+
+.number4 {
+  grid-area: number4;
+}
+
+.number5 {
+  grid-area: number5;
+}
+
+.number6 {
+  grid-area: number6;
+}
+
+.minus {
+  grid-area: minus;
+}
+
+.number1 {
+  grid-area: number1;
+}
+
+.number2 {
+  grid-area: number2;
+}
+
+.number3 {
+  grid-area: number3;
+}
+
+.multiply {
+  grid-area: multiply;
+}
+
+.clear {
+  grid-area: clear;
+}
+
+.number0 {
+  grid-area: number0;
+}
+
+.equal {
+  grid-area: equal;
+}
+
+.divide {
+  grid-area: divide;
+}
