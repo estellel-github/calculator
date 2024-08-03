@@ -1,62 +1,97 @@
-* {
+@font-face {
+  font-family: "DSEG";
+  src: url(./fonts/DSEG14Classic-Regular.ttf) format("truetype");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
 }
 
 body {
   padding: 32px;
+  margin-bottom: 100px;
 }
 
 .main-container {
-  width: 400px;
-  height: 600px;
   margin: auto;
   padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 16px;
-  background-color:#dddada;
 }
 
 .calculator {
-  display: grid;
+  max-width: 330px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 16px;
   padding: 16px;
-  grid-template-areas:
-  'display display display display'
-  'number7 number8 number9 plus'
-  'number4 number5 number6 minus'
-  'number1 number2 number3 multiply'
-  'clear number0 equal divide';
-  background-color:#f3f0f0;
+  background-color:#e9e7e7;
   border-radius: 16px;
   margin: 16px 0 16px 0;
 }
 
-.display {
-  grid-area: display;
+.buttons-grid {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-content: center;
+  grid-gap: 10px;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+.screen-wrapper {
+  grid-area: display-wrapper;
   display: flex;
   justify-content: end;
   align-items: center;
+  width: 300px;
+  height: 140px;
+  min-height: 140px;
+  margin: 16px 0 16px 0;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  font-family: DSEG;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  display: flex;
+  text-align: end;
+  align-items: flex-end;
+  justify-content: flex-end;
   font-size: 42px;
-  background-color:black;
   border-radius: 5px;
   margin: 16px 0 16px 0;
   padding: 12px;
-  color: rgb(255, 255, 255);
+  background-color: #c7d6af;
+  color:#545c48;
 }
 
 .button {
-  height: 70px;
-  width: 70px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 16px;
   /* border: 1px solid #868686; */
   box-shadow: 1px 2px 1px rgb(172, 170, 170);
   color: #ffffff;
@@ -64,9 +99,14 @@ body {
   font-size: 24px;
 }
 
-.equal.button {
-  background-color:aqua;
+.span-2 {
+  grid-column: span 2;
 }
+
+.equal.button {
+  background-color:#005ed8a1;
+}
+
 .button:active {
   box-shadow: none;
 }
@@ -81,68 +121,4 @@ body {
 
 .number {
   background-color: rgba(95, 95, 95, 0.671);
-}
-
-.number7 {
-  grid-area: number7;
-}
-
-.number8 {
-  grid-area: number8;
-}
-
-.number9 {
-  grid-area: number9;
-}
-
-.plus {
-  grid-area: plus;
-}
-
-.number4 {
-  grid-area: number4;
-}
-
-.number5 {
-  grid-area: number5;
-}
-
-.number6 {
-  grid-area: number6;
-}
-
-.minus {
-  grid-area: minus;
-}
-
-.number1 {
-  grid-area: number1;
-}
-
-.number2 {
-  grid-area: number2;
-}
-
-.number3 {
-  grid-area: number3;
-}
-
-.multiply {
-  grid-area: multiply;
-}
-
-.clear {
-  grid-area: clear;
-}
-
-.number0 {
-  grid-area: number0;
-}
-
-.equal {
-  grid-area: equal;
-}
-
-.divide {
-  grid-area: divide;
 }
