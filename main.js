@@ -158,9 +158,6 @@ equalBtn.addEventListener("click", () => {
 // Add keyboard support
 // Add percentage button
 // Add plus/minus button
-// Display calculation history (?)
-
-
 
 // function deleteNumber() {
 //   currentOperationScreen.textContent = currentOperationScreen.textContent
