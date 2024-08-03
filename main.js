@@ -1,15 +1,12 @@
 const add = (a, b) => {
   return a + b;
 };
-
 const subtract = (a, b) => {
   return a - b;
 };
-
 const multiply = (a, b) => {
   return a * b;
 };
-
 const divide = (a, b) => {
   return a / b;
 };
@@ -35,6 +32,24 @@ const operatorButtons = document.querySelectorAll(".operator");
 const equalBtn = document.querySelector("#equal");
 const clearBtn = document.querySelector("#clear");
 const deleteBtn = document.querySelector("#delete");
+const pointBtn = document.querySelector("#point");
+
+function adjustFontSize() {
+  const maxFontSize = 42;
+  const minFontSize = 32;
+  let fontSize = maxFontSize;
+
+  const textLength = screenEl.textContent.length;
+  if (textLength > 8) {
+    fontSize = maxFontSize - (textLength - 10) * 2;
+  }
+
+  if (fontSize < minFontSize) {
+    fontSize = minFontSize;
+  }
+
+  screenEl.style.fontSize = fontSize + "px";
+}
 
 const updateScreen = (value) => {
   screenEl.textContent = ("");
@@ -57,9 +72,9 @@ clearBtn.addEventListener("click", () => {
   clearScreen();
 });
 
-const deleteLastNumber = () => {
+const deleteLastDigit = () => {
   if (!num1 && !num2) {
-    updateScreen("NOTHING TO DELETE")
+    updateScreen("NOTHING TO DELETE");
   }
   if (!num1) {
     return;
@@ -76,25 +91,29 @@ const deleteLastNumber = () => {
 }
 
 deleteBtn.addEventListener("click", () => {
-  deleteLastNumber();
+  deleteLastDigit();
 })
 
-function adjustFontSize() {
-  const maxFontSize = 42;
-  const minFontSize = 32;
-  let fontSize = maxFontSize;
-
-  const textLength = screenEl.textContent.length;
-  if (textLength > 8) {
-    fontSize = maxFontSize - (textLength - 10) * 2;
+const appendPoint = () => {
+  if (!num1 || num1.includes(".") || num2.includes(".")) {
+    return;
   }
-
-  if (fontSize < minFontSize) {
-    fontSize = minFontSize;
+  if (num1 && !num2) {
+    num1 += ".";
+    updateScreen(num1);
+    console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
   }
-
-  screenEl.style.fontSize = fontSize + 'px';
+  if (num2) {
+    num2 += ".";
+    updateScreen(num2);
+    console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
+  }
 }
+
+pointBtn.addEventListener("click", () => {
+  appendPoint();
+  console.log("Test");
+})
 
 numButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
@@ -152,7 +171,7 @@ equalBtn.addEventListener("click", () => {
 // --DONE-- Make screen font resizeable (?)
 // --DONE-- Check output for largest numbers
 // --DONE-- Implement Del button functionality
-// Allow for decimal input (only one dot allowed!)
+// --DONE-- Allow for decimal input (only one dot allowed!)
 // Add row on top of screen to show previous inputs
 // Limit input to 9 digits
 // Add keyboard support
