@@ -22,8 +22,11 @@ body {
 }
 
 .main-container {
-  margin: auto;
+  /* margin: auto; */
+  height: 100dvh;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 16px;
@@ -54,7 +57,6 @@ body {
 }
 
 .screen-wrapper {
-  grid-area: display-wrapper;
   display: flex;
   justify-content: end;
   align-items: center;
