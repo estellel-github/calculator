@@ -174,7 +174,7 @@ equalBtn.addEventListener("click", () => {
   } else {
     updateScreen(result);
   }
-  num1 = result;
+  num1 = result.toString();
   num2 = "";
   operator = "";
   console.log("Result:", result);
