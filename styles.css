@@ -18,7 +18,8 @@ html {
 }
 
 body {
-  /* margin-bottom: 100px; */
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .main-container {
