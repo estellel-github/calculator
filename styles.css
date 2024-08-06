@@ -19,13 +19,12 @@ html {
 }
 
 body {
-  padding: 32px;
+  padding: 1vh;
   margin-bottom: 100px;
 }
 
 .main-container {
   margin: auto;
-  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
