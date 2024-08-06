@@ -164,9 +164,9 @@ equalBtn.addEventListener("click", () => {
   }
   result = roundNumber(operate(Number(num1), operator, Number(num2)));
   if (operator === "÷" && Number(num2) === 0) {
-    updateScreen("No can do!");
+    updateScreen("*No can do*");
     setTimeout(() => {
-      updateScreen("Clearing...");
+      updateScreen("*Clearing*");
     }, 1000);
     setTimeout(() => {
       clearScreen();
