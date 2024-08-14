@@ -49,7 +49,7 @@ function adjustFontSize() {
 }
 
 const updateScreen = (value) => {
-  screenEl.textContent = ("");
+  screenEl.textContent = "";
   screenEl.textContent = value;
   adjustFontSize();
 };
@@ -82,11 +82,11 @@ const deleteLastDigit = () => {
     num2 = num2.toString().slice(0, -1);
     updateScreen(num2);
   }
-}
+};
 
 deleteBtn.addEventListener("click", () => {
   deleteLastDigit();
-})
+});
 
 const appendPoint = () => {
   if (!num1 || num1.toString().includes(".") || num2.toString().includes(".")) {
@@ -102,63 +102,72 @@ const appendPoint = () => {
     updateScreen(num2);
     console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
   }
-}
+};
 
 pointBtn.addEventListener("click", () => {
   appendPoint();
   console.log("Test");
-})
+});
 
 const convertPosNeg = () => {
   if (!num1) {
     return;
   }
   if (num1 && !num2) {
-    num1 *= (-1);
+    num1 *= -1;
     updateScreen(num1);
     console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
   }
   if (num2) {
-    num2 *= (-1);
+    num2 *= -1;
     updateScreen(num2);
     console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
   }
-}
+};
 
 posNegBtn.addEventListener("click", () => {
   convertPosNeg();
-})
+});
+
+function setDigit(digitInput) {
+  let currentDigit = digitInput;
+  if (operator === "") {
+    num1 += currentDigit;
+    updateScreen(num1);
+  } else {
+    num2 += currentDigit;
+    updateScreen(num2);
+  }
+  console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
+}
 
 numButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
-    let currentDigit = event.target.textContent;
-    if (operator === "") {
-      num1 += currentDigit;
-      updateScreen(num1);
-    } else {
-      num2 += currentDigit;
-      updateScreen(num2);
-    }
-    console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
+    setDigit(event.target.textContent);
   });
 });
 
+function setOperator(operatorInput) {
+  if (num1 != "") {
+    operator = operatorInput;
+  }
+  updateScreen(operator);
+  console.log("Num1", num1, "Operator:", operator, "Num2", num2);
+}
+
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
-    currentOperator = event.target.textContent;
-    if (num1 != "") {
-      operator = currentOperator;
-    }
-    updateScreen(operator);
-    console.log("Num1", num1, "Operator:", operator, "Num2", num2);
+    setOperator(event.target.textContent);
   });
 });
 
 function roundNumber(number) {
-  return Math.round(number * 10000000) / 10000000
+  return Math.round(number * 10000000) / 10000000;
 }
 
-equalBtn.addEventListener("click", () => {
+equalBtn.addEventListener("click", evaluateResult);
+
+function evaluateResult() {
   if (num1 === "" || num2 === "" || operator === "") {
     return;
   }
@@ -178,7 +187,20 @@ equalBtn.addEventListener("click", () => {
   num2 = "";
   operator = "";
   console.log("Result:", result);
-});
+}
+
+function handleKeyPress(e) {
+  if (e.key >= 0 && e.key <= 9) return setDigit(e.key);
+  if (e.key === "+") return setOperator("+");
+  if (e.key === "-") return setOperator("-");
+  if (e.key === "*" || e.key === "x") return setOperator("x");
+  if (e.key === "/" || e.key === "÷") return setOperator("÷");
+  if (e.key === "=" || e.key === "Enter") return evaluateResult();
+  if (e.key === ".") return appendPoint();
+  if (e.key === "Backspace" || e.key === "Delete") return deleteLastDigit();
+  }
+
+document.addEventListener("keydown", handleKeyPress);
 
 // TO DO
 // --DONE-- Limit decimal output (round up)
@@ -187,7 +209,8 @@ equalBtn.addEventListener("click", () => {
 // --DONE-- Implement Del button functionality
 // --DONE-- Allow for decimal input (only one dot allowed!)
 // --DONE-- Add plus/minus button
-// Add keyboard support
+// --DONE-- Add keyboard support
+// Test keyboard support further
 // Add row on top of screen to show previous inputs
 // Limit input to 9 digits
 // Add percentage button
