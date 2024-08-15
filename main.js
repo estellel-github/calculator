@@ -148,6 +148,9 @@ numButtons.forEach((button) => {
 });
 
 function setOperator(operatorInput) {
+  if (operator != "") {
+    return;
+  }
   if (num1 != "") {
     operator = operatorInput;
   }
