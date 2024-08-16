@@ -204,16 +204,3 @@ function handleKeyPress(e) {
   }
 
 document.addEventListener("keydown", handleKeyPress);
-
-// TO DO
-// --DONE-- Limit decimal output (round up)
-// --DONE-- Make screen font resizeable
-// --DONE-- Check output for largest numbers
-// --DONE-- Implement Del button functionality
-// --DONE-- Allow for decimal input (only one dot allowed!)
-// --DONE-- Add plus/minus button
-// --DONE-- Add keyboard support
-// Test keyboard support further
-// Add row on top of screen to show previous inputs
-// Limit input to 9 digits
-// Add percentage button
