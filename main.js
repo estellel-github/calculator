@@ -114,7 +114,7 @@ function setOperation(operatorInput) {
 }
 
 function roundNumber(number) {
-  return Math.round(number * 10000000) / 10000000;
+  return Math.round(number * 1000) / 1000;
 }
 
 function evaluateResult() {
