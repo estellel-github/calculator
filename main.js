@@ -11,23 +11,26 @@ const divide = (a, b) => {
   return a / b;
 };
 
-const operate = (num1, operator, num2) => {
+const operate = (operator, a, b) => {
+  a = Number(a);
+  b = Number(b);
   switch (operator) {
     case "+":
-      return add(num1, num2);
+      return add(a, b);
     case "-":
-      return subtract(num1, num2);
+      return subtract(a, b);
     case "x":
-      return multiply(num1, num2);
+      return multiply(a, b);
     case "÷":
-      return divide(num1, num2);
+      return divide(a, b);
     default:
       return null;
   }
 };
 
 const numButtons = document.querySelectorAll(".number");
-const screenEl = document.querySelector("#screen");
+const historyScreen = document.querySelector("#history-screen");
+const currentScreen = document.querySelector("#main-screen");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalBtn = document.querySelector("#equal");
 const clearBtn = document.querySelector("#clear");
@@ -35,172 +38,116 @@ const deleteBtn = document.querySelector("#delete");
 const pointBtn = document.querySelector("#point");
 const posNegBtn = document.querySelector("#pos-neg");
 
-function adjustFontSize() {
-  const maxFontSize = 42;
-  const minFontSize = 32;
-  let fontSize = maxFontSize;
+let num1 = "";
+let num2 = "";
+let currentOperation = null;
+let resetScreenFlag = false;
 
-  const textLength = screenEl.textContent.length;
-  if (textLength > 8) {
-    fontSize = minFontSize;
-  }
+numButtons.forEach((button) => button.addEventListener("click", () => addDigit(button.textContent)));
+operatorButtons.forEach((button) => button.addEventListener("click", () => setOperation(button.textContent)));
+equalBtn.addEventListener("click", evaluateResult);
+clearBtn.addEventListener("click", () => clearScreen());
+deleteBtn.addEventListener("click", () => deleteLastDigit());
+pointBtn.addEventListener("click", () => addPoint());
+posNegBtn.addEventListener("click", () => convertPosNeg());
 
-  screenEl.style.fontSize = fontSize + "px";
-}
-
-const updateScreen = (value) => {
-  screenEl.textContent = "";
-  screenEl.textContent = value;
-  adjustFontSize();
+const resetCurrentScreen = () => {
+  currentScreen.textContent = "";
+  resetScreenFlag = false;
 };
 
 const clearScreen = () => {
+  currentScreen.textContent = "0";
+  historyScreen.textContent = "";
   num1 = "";
   num2 = "";
-  result = "";
-  operator = "";
-  updateScreen("");
-  console.log("Screen cleared", num1, num2, result, operator);
+  operationCurrent = null;
 };
-
-clearScreen();
-
-clearBtn.addEventListener("click", () => {
-  clearScreen();
-});
 
 const deleteLastDigit = () => {
-  if (!num1 || (!num1 && !num2)) {
-    return;
-  }
-  if (num1 && !num2) {
-    num1 = num1.toString().slice(0, -1);
-    updateScreen(num1);
-    console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
-  }
-  if (num2) {
-    num2 = num2.toString().slice(0, -1);
-    updateScreen(num2);
-  }
+  currentScreen.textContent = currentScreen.textContent
+    .toString()
+    .slice(0, -1);
 };
 
-deleteBtn.addEventListener("click", () => {
-  deleteLastDigit();
-});
-
-const appendPoint = () => {
-  if (!num1 || num1.toString().includes(".") || num2.toString().includes(".")) {
+const addPoint = () => {
+  if (resetScreenFlag) {
+    resetCurrentScreen();
+  }
+  if (currentScreen.textContent === "") {
+    currentScreen.textContent === "0";
+  }
+  if (currentScreen.textContent.includes(".")) {
     return;
   }
-  if (num1 && !num2) {
-    num1 += ".";
-    updateScreen(num1);
-    console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
-  }
-  if (num2) {
-    num2 += ".";
-    updateScreen(num2);
-    console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
-  }
+  currentScreen.textContent += ".";
 };
-
-pointBtn.addEventListener("click", () => {
-  appendPoint();
-  console.log("Test");
-});
 
 const convertPosNeg = () => {
-  if (!num1) {
+  if (resetScreenFlag) {
+    resetCurrentScreen();
+  }
+  if (currentScreen.textContent === "0") {
     return;
   }
-  if (num1 && !num2) {
-    num1 *= -1;
-    updateScreen(num1);
-    console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
+  if (currentScreen.textContent.includes("-")) {
+    currentScreen.textContent = Array.from(currentScreen.textContent).filter(char => char !== "-").join('');
   }
-  if (num2) {
-    num2 *= -1;
-    updateScreen(num2);
-    console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
-  }
+  currentScreen.textContent = "-" + currentScreen.textContent;
 };
 
-posNegBtn.addEventListener("click", () => {
-  convertPosNeg();
-});
-
-function setDigit(digitInput) {
-  let currentDigit = digitInput;
-  if (operator === "") {
-    num1 += currentDigit;
-    updateScreen(num1);
-  } else {
-    num2 += currentDigit;
-    updateScreen(num2);
+function addDigit(digitInput) {
+  if (currentScreen.textContent === "0" || resetScreenFlag) {
+    resetCurrentScreen();
   }
-  console.log("Num1:", num1, "Operator", operator, "Num2:", num2);
+  currentScreen.textContent += digitInput;
 }
 
-numButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    setDigit(event.target.textContent);
-  });
-});
-
-function setOperator(operatorInput) {
-  if (operator != "") {
-    return;
+function setOperation(operatorInput) {
+  if (currentOperation !== null) {
+    evaluateResult();
   }
-  if (num1 != "") {
-    operator = operatorInput;
-  }
-  updateScreen(operator);
-  console.log("Num1", num1, "Operator:", operator, "Num2", num2);
+  num1 = currentScreen.textContent;
+  currentOperation = operatorInput;
+  historyScreen.textContent = `${num1} ${currentOperation}`;
+  resetScreenFlag = true;
 }
-
-operatorButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    setOperator(event.target.textContent);
-  });
-});
 
 function roundNumber(number) {
   return Math.round(number * 10000000) / 10000000;
 }
 
-equalBtn.addEventListener("click", evaluateResult);
-
 function evaluateResult() {
-  if (num1 === "" || num2 === "" || operator === "") {
+  if (currentOperation === null || resetScreenFlag) {
     return;
   }
-  result = roundNumber(operate(Number(num1), operator, Number(num2)));
-  if (operator === "÷" && Number(num2) === 0) {
-    updateScreen("*No can do*");
+  if (currentOperation === "÷" && currentScreen.textContent === "0") {
+    currentScreen.textContent = "*No can do*";
     setTimeout(() => {
-      updateScreen("*Clearing*");
+      currentScreen.textContent = "*Clearing*";
     }, 1000);
     setTimeout(() => {
       clearScreen();
     }, 2000);
-  } else {
-    updateScreen(result);
+    return;
   }
-  num1 = result.toString();
-  num2 = "";
-  operator = "";
-  console.log("Result:", result);
+  num2 = currentScreen.textContent;
+  currentScreen.textContent = roundNumber(
+    operate(currentOperation, num1, num2)
+  );
+  historyScreen.textContent = `${num1} ${currentOperation} ${num2} =`;
+  currentOperation = null;
 }
 
 function handleKeyPress(e) {
-  if (e.key >= 0 && e.key <= 9) return setDigit(e.key);
-  if (e.key === "+") return setOperator("+");
-  if (e.key === "-") return setOperator("-");
-  if (e.key === "*" || e.key === "x") return setOperator("x");
-  if (e.key === "/" || e.key === "÷") return setOperator("÷");
+  if (e.key >= 0 && e.key <= 9) return addDigit(e.key);
+  if (e.key === "+") return setOperation("+");
+  if (e.key === "-") return setOperation("-");
+  if (e.key === "*" || e.key === "x") return setOperation("x");
+  if (e.key === "/" || e.key === "÷") return setOperation("÷");
   if (e.key === "=" || e.key === "Enter") return evaluateResult();
-  if (e.key === ".") return appendPoint();
+  if (e.key === ".") return addPoint();
   if (e.key === "Backspace" || e.key === "Delete") return deleteLastDigit();
-  }
+}
 
 document.addEventListener("keydown", handleKeyPress);
