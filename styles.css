@@ -23,7 +23,6 @@ body {
 }
 
 .main-container {
-  /* margin: auto; */
   height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -73,7 +72,7 @@ body {
 }
 
 .screen-wrapper * {
-  font-family: DSEG;
+  font-family: DSEG, monospace;
   width: 100%;
   overflow-wrap: break-word;
   word-break: break-all;
@@ -84,8 +83,8 @@ body {
   border-radius: 5px;
   margin: 8px 0 8px 0;
   padding: 8px;
-  background-color: #c7d6af;
-  color:#545c48;
+  background-color: inherit;
+  color: inherit;
 }
 
 .history-screen {

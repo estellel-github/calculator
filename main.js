@@ -61,7 +61,7 @@ const clearScreen = () => {
   historyScreen.textContent = "";
   num1 = "";
   num2 = "";
-  operationCurrent = null;
+  currentOperation = null;
 };
 
 const deleteLastDigit = () => {
