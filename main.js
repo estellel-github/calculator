@@ -1,28 +1,23 @@
-const add = (a, b) => {
-  return a + b;
-};
-const subtract = (a, b) => {
-  return a - b;
-};
-const multiply = (a, b) => {
-  return a * b;
-};
-const divide = (a, b) => {
-  return a / b;
-};
+const operations = (function () {
+  const add = (a, b) => a + b;
+  const sub = (a, b) => a - b;
+  const mul = (a, b) => a * b;
+  const div = (a, b) => a / b;
+  return { add, sub, mul, div };
+})();
 
 const operate = (operator, a, b) => {
   a = Number(a);
   b = Number(b);
   switch (operator) {
     case "+":
-      return add(a, b);
+      return operations.add(a, b);
     case "-":
-      return subtract(a, b);
+      return operations.sub(a, b);
     case "x":
-      return multiply(a, b);
+      return operations.mul(a, b);
     case "÷":
-      return divide(a, b);
+      return operations.div(a, b);
     default:
       return null;
   }
