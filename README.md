@@ -9,7 +9,7 @@ This project is a part of **The Odin Project** curriculum.
 
 ### Features
 - Basic arithmetic operations: addition, subtraction, multiplication, and division
-- Button for +/- operation
+- Button for `+/-` operation
 - Input history display: the most recent operation is shown at top of screen above the result
 - Clear and backspace functions
 - Responsive layout
@@ -33,4 +33,4 @@ This project is a part of **The Odin Project** curriculum.
 - Learned about **keyboard events** to enable keyboard support.
 
 ## How to Use
-Clone the repository and open 'index.html' in a web browser to start using the calculator.
+Clone the repository and open `index.html` in a web browser to start using the calculator.
