@@ -18,7 +18,7 @@ This project is a part of **The Odin Project** curriculum.
 ### Tools Used
 - **Development:** Visual Studio Code
 - **Version Control:** Git and GitHub
-- Learning materials from Odin Project curriculum (Foundations) and support from their Discord server
+- Learning materials from Odin Project curriculum (Foundations) and support from their Discord community
 
 ### External Resources
 - Used an external font for the calculator screen to imitate a 7-segment display. https://www.keshikan.net/fonts-e.html
