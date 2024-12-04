@@ -3,11 +3,14 @@
 A simple calculator application built using HTML, CSS, and JavaScript.
 This project is a part of **The Odin Project** curriculum.
 
+![alt text](image.png)
+
 🔗 Live demo: https://estellel-github.github.io/calculator/
 
 ## Overview
 
 ### Features
+
 - Basic arithmetic operations: addition, subtraction, multiplication, and division
 - Button for `+/-` operation
 - Input history display: the most recent operation is shown at top of screen above the result
@@ -16,11 +19,13 @@ This project is a part of **The Odin Project** curriculum.
 - Keyboard support
 
 ### Tools Used
+
 - **Development:** Visual Studio Code
 - **Version Control:** Git and GitHub
 - Learning materials from Odin Project curriculum (Foundations) and support from their Discord community
 
 ### External Resources
+
 - Used an external font for the calculator screen to imitate a 7-segment display. https://www.keshikan.net/fonts-e.html
 
 ### Learning Outcomes
@@ -33,4 +38,5 @@ This project is a part of **The Odin Project** curriculum.
 - Learned about **keyboard events** to enable keyboard support.
 
 ## How to Use
+
 Clone the repository and open `index.html` in a web browser to start using the calculator.
